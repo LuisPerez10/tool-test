@@ -1,0 +1,18 @@
+version: '3'
+services:
+  php-service:
+    image: php:8.2-apache
+    ports:
+      - "8082:80"
+    # build: 
+    #   context: ./
+    # volumes:
+      # - ./config/my-httpd.conf:/etc/apache2/sites-available/my-httpd.conf
+      # - ./src:/var/www/html
+    volumes:
+      - ./src:/var/www/html
+      - ./config/my-httpd.conf:/etc/apache2/sites-available/my-httpd.conf
+      - ./config/my-etag.conf:/etc/apache2/sites-available/my-etag.conf
+    command: >
+      sh -c "a2dissite 000-default.conf && a2ensite my-httpd.conf && a2ensite my-etag.conf && apachectl -D FOREGROUND && service apache2 reload"
+    
