@@ -1,7 +1,8 @@
 version: '3'
 services:
   php-service:
-    image: php:8.2-apache
+    image: php:5.3-apache
+    # image: php:8.2-apache
     ports:
       - "8082:80"
     # build: 
